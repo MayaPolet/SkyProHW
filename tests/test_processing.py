@@ -1,4 +1,5 @@
 import pytest
+
 from src.processing import only_state, sorted_date
 
 

@@ -76,3 +76,26 @@ if __name__ == "__main__":
 # ]
 # if __name__ == "__main__":
 #     print(sorted_date(info_list2, False))
+
+# Генераторы
+# if __name__ == "__main__":
+#     usd_transactions = filter_by_currency(transactions, "USD")
+#     for _ in range(2):
+#         print(next(usd_transactions)["id"])
+#
+# if __name__ == "__main__":
+#     descriptions = transaction_descriptions(transactions)
+#     for _ in range(5):
+#         print(next(descriptions))
+
+# if __name__ == "__main__":
+# for card_number in card_number_generator(1, 5):
+#     print(card_number)
+
+# expected_result = [
+#     "0000 0000 0000 0101",
+#     "0000 0000 0000 0102",
+#     "0000 0000 0000 0103",
+#     "0000 0000 0000 0104",
+#     "0000 0000 0000 0105",
+# ]

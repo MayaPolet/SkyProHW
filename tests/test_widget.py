@@ -1,5 +1,6 @@
-from src.widget import mask_info, date_format
 import pytest
+
+from src.widget import date_format, mask_info
 
 
 @pytest.mark.parametrize(
