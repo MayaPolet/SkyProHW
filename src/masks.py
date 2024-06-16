@@ -5,7 +5,7 @@
 # Пример работы функции, возвращающей маску счета
 # 73654108430135874305  # входной аргумент
 # **4305                # выход функции
-
+from logers import log2
 
 card_number = "1111222233334444"
 account_number = "1111222233334444"
@@ -25,6 +25,8 @@ def mask_card(card_number: str) -> str:
 
 
 if __name__ == "__main__":
-    print(card_number, account_number, sep=" ")
-    print(mask_card(card_number))
-    print(mask_account(account_number))
+    log2.debug(card_number)
+    log2.debug(account_number)
+    # log2.debug(card_number, account_number, sep=" ")
+    log2.debug(mask_card(card_number))
+    log2.debug(mask_account(account_number))
