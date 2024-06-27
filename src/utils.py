@@ -6,7 +6,9 @@ import json
 from dotenv import load_dotenv
 
 from src.external_api import currency_conversion
+
 from logers import log1
+
 load_dotenv()
 
 def get_transactions_from_json(path: str) -> list[dict]:
@@ -29,7 +31,9 @@ def get_transactions_from_json(path: str) -> list[dict]:
 if __name__ == "__main__":
     pass_to_json = "../data/operations.json"
     number_of_trans = len(get_transactions_from_json(pass_to_json))
+
     log1.debug(f"Сформировано {number_of_trans } записей с транзакциями")
+
 
 def get_amount(transaction: dict) -> float:
     """Принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях"""

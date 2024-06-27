@@ -5,7 +5,9 @@ from unittest.mock import patch
 
 from dotenv import load_dotenv
 
+
 from src.external_api import currency_conversion, params
+
 
 
 load_dotenv()
@@ -21,4 +23,7 @@ def test_currency_conversion(mock_get):
         "rates": {"RUB": 88.503702},
     }
     assert currency_conversion("USD", 10) == 885.04
+
     mock_get.assert_called_once_with("https://api.apilayer.com/exchangerates_data/latest?base=USD", params=params)
+
+

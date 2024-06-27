@@ -15,15 +15,17 @@ API_KEY = os.getenv("API_KEY")
 #print(f'API_KEY= {API_KEY} ')
 params = {"apikey": os.getenv("API_KEY")}
 
-# def currency_exchange_rate(currency: str) -> float:
-#     """Принимает название валюты и возвращает ее курс к рублю"""
-#     response = requests.get(
-#         f"https://api.apilayer.com/fixer/latest?base={currency.upper()}&symbols=RUB", params=params)
-#
-#     return float(response.json()["rates"]["RUB"])
-#
-# # rate = currency_exchange_rate('USD')
-# # print(f"Курс = {rate}")
+
+def currency_exchange_rate(currency: str) -> float:
+    """Принимает название валюты и возвращает ее курс к рублю"""
+    response = requests.get(
+        f"https://api.apilayer.com/fixer/latest?base={currency.upper()}&symbols=RUB", params=params)
+
+    return float(response.json()["rates"]["RUB"])
+
+# rate = currency_exchange_rate('USD')
+# print(f"Курс = {rate}")
+
 
 
 def currency_conversion(currency: str, sum_transaction: float) -> Any:
@@ -39,8 +41,10 @@ def currency_conversion(currency: str, sum_transaction: float) -> Any:
     except requests.exceptions.RequestException:
         return 0.00
 
+
     #response_data = json.loads(response.text)
     response_data = response.json()
+
     print(response_data)
     rate = response_data["rates"]["RUB"]
 
