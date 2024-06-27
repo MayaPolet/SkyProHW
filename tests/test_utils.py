@@ -3,7 +3,7 @@ import os
 import pytest
 from dotenv import load_dotenv
 
-from src.utils import  get_transactions_from_json
+from src.utils import get_transactions_from_json
 
 load_dotenv()
 PATH_TO_OPERATION_JSON = os.getenv("PATH_TO_OPERATION_JSON")
@@ -118,4 +118,3 @@ TRASACTIONS_LIST = [
 )
 def test_get_transactions_from_json(path, expected) -> None:
     assert get_transactions_from_json(path) == expected
-

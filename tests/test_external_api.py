@@ -1,15 +1,13 @@
 import os
-import json
-from unittest.mock import MagicMock, Mock
 from unittest.mock import patch
 
 from dotenv import load_dotenv
 
 from src.external_api import currency_conversion, params
 
-
 load_dotenv()
 headers = {"apikey": os.getenv("API_KEY")}
+
 
 @patch("requests.get")
 def test_currency_conversion(mock_get):
