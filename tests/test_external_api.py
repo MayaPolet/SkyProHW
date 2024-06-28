@@ -1,15 +1,13 @@
 import os
-import json
-from unittest.mock import MagicMock, Mock
 from unittest.mock import patch
 
 from dotenv import load_dotenv
 
-from src.external_api import currency_conversion
-
+from src.external_api import currency_conversion, params
 
 load_dotenv()
 headers = {"apikey": os.getenv("API_KEY")}
+
 
 @patch("requests.get")
 def test_currency_conversion(mock_get):
@@ -21,4 +19,4 @@ def test_currency_conversion(mock_get):
         "rates": {"RUB": 88.503702},
     }
     assert currency_conversion("USD", 10) == 885.04
-    mock_get.assert_called_once_with("https://api.apilayer.com/exchangerates_data/latest?base=USD")
+    mock_get.assert_called_once_with("https://api.apilayer.com/exchangerates_data/latest?base=USD", params=params)
