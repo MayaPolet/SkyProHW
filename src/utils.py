@@ -10,7 +10,7 @@ import json
 import pandas as pd
 from dotenv import load_dotenv
 
-from logers import log1
+# from logers import log1
 from src.external_api import currency_conversion
 
 load_dotenv()
@@ -34,10 +34,10 @@ def get_transactions_from_json(path: str) -> list[dict]:
         return result
 
 
-if __name__ == "__main__":
-    path_to_json = "../data/operations.json"
-    number_of_trans = len(get_transactions_from_json(path_to_json))
-    log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
+# if __name__ == "__main__":
+#     path_to_json = "../data/operations.json"
+#     number_of_trans = len(get_transactions_from_json(path_to_json))
+#     log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
 
 
 def get_transactions_from_csv(path: str) -> list[dict]:
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
 
 def get_transactions_from_excel(path: str) -> list[dict]:
-    "Принимает на вход путь до Excell-файла и возвращает список словарей с данными о финансовых транзакциях." ""
+    """Принимает на вход путь до Excell-файла и возвращает список словарей с данными о финансовых транзакциях."""
 
     res = pd.read_excel(path).to_json(orient="records", indent=4, force_ascii=False)
     return json.loads(res)
