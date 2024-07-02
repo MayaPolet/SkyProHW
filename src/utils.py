@@ -1,12 +1,16 @@
-# Реализуйте функцию, которая принимает на вход путь до JSON-файла и возвращает список словарей
+# 12.1 Реализуйте функцию, которая принимает на вход путь до JSON-файла и возвращает список словарей
 # с данными о финансовых транзакциях. Если файл пустой, содержит не список или не найден,
 # функция возвращает пустой список. Функцию поместите в модуль # utils
 
+# 13.1 Реализовать считывание финансовых операций из CSV - и XLSX - файлов.
+
+import csv
 import json
 
+import pandas as pd
 from dotenv import load_dotenv
 
-from logers import log1
+# from logers import log1
 from src.external_api import currency_conversion
 
 load_dotenv()
@@ -30,10 +34,45 @@ def get_transactions_from_json(path: str) -> list[dict]:
         return result
 
 
+# if __name__ == "__main__":
+#     path_to_json = "../data/operations.json"
+#     number_of_trans = len(get_transactions_from_json(path_to_json))
+#     log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
+
+
+def get_transactions_from_csv(path: str) -> list[dict]:
+    """Принимает на вход путь до CSV-файла и возвращает список словарей с данными о финансовых транзакциях."""
+    with open(path, "r", encoding="utf-8") as file:
+        reader = csv.reader(file, delimiter=";")
+        header = next(reader)
+        result = []
+        for row in reader:
+            row_dict = dict()
+            for idx, item in enumerate(header):
+                row_dict[item] = row[idx]
+            result.append(row_dict)
+    return result
+
+
 if __name__ == "__main__":
-    pass_to_json = "../data/operations.json"
-    number_of_trans = len(get_transactions_from_json(pass_to_json))
-    log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
+    path_to_csv = "../data/transactions.csv"
+    number_of_trans = len(get_transactions_from_csv(path_to_csv))
+    print(f"Первая транзакция= {get_transactions_from_csv(path_to_csv)[:1]}")
+    print(f"Сформировано {number_of_trans} записей с транзакциями")
+
+
+def get_transactions_from_excel(path: str) -> list[dict]:
+    """Принимает на вход путь до Excell-файла и возвращает список словарей с данными о финансовых транзакциях."""
+
+    res = pd.read_excel(path).to_json(orient="records", indent=4, force_ascii=False)
+    return json.loads(res)
+
+
+if __name__ == "__main__":
+    path_to_xls = "../data/transactions_excel.xlsx"
+    number_of_trans = len(get_transactions_from_excel(path_to_xls))
+    print(f"Первая транзакция= {get_transactions_from_excel(path_to_xls)[:1]}")
+    print(f"Сформировано {number_of_trans} записей с транзакциями")
 
 
 def get_amount(transaction: dict) -> float:
