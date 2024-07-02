@@ -6,6 +6,7 @@ from src.masks import mask_account, mask_card
 info1 = "Maestro 1596837868705199"
 info2 = "Счет 64686473678894779589"
 info3 = "MasterCard 7158300734726758"
+info4 = None
 
 
 def mask_info(text_info: str) -> str:
@@ -13,8 +14,10 @@ def mask_info(text_info: str) -> str:
     number_info: str
     mask: str
     info_mask: str
+    if text_info is None:
+        info_mask = []
 
-    if text_info[0:4] == "Счет":
+    elif text_info[0:4] == "Счет":
         number_info = text_info[-20:]
         mask = mask_account(number_info)
         info_mask = "Счет " + mask
@@ -30,6 +33,7 @@ if __name__ == "__main__":
     print(mask_info(info1))
     print(mask_info(info2))
     print(mask_info(info3))
+    print(mask_info(info4))
 
 
 # date_format  принимает на вход строку вида 2018-07-11T02:26:18.671407

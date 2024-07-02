@@ -30,14 +30,20 @@ def get_transactions_from_json(path: str) -> list[dict]:
     if len(json_data) == 0 or type(json_data) is not list:
         return []
     else:
-        result = [operation.get("operationAmount") for operation in json_data]
+        # result = [operation.get("operationAmount") for operation in json_data]
+        result = json_data
         return result
 
 
-# if __name__ == "__main__":
-#     path_to_json = "../data/operations.json"
-#     number_of_trans = len(get_transactions_from_json(path_to_json))
-#     log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
+if __name__ == "__main__":
+    # path_to_json = "../data/operations.json"
+    path_to_json = "../data/transactions_json.ison"
+    trans_list = get_transactions_from_json(path_to_json)
+    number_of_trans = len(trans_list)
+    print(f"В ПЕЧАТИ json: Сформировано {number_of_trans} из json")
+    print(f"В ПЕЧАТИ json: Список словарей- первый {trans_list[:1]}")
+    log1.debug(f"Сформировано {number_of_trans} записей с транзакциями")
+
 
 
 def get_transactions_from_csv(path: str) -> list[dict]:
@@ -57,7 +63,10 @@ def get_transactions_from_csv(path: str) -> list[dict]:
 if __name__ == "__main__":
     path_to_csv = "../data/transactions.csv"
     number_of_trans = len(get_transactions_from_csv(path_to_csv))
-    print(f"Первая транзакция= {get_transactions_from_csv(path_to_csv)[:1]}")
+    print(f"Первая транзакция из csv = {get_transactions_from_csv(path_to_csv)[:1]}")
+    with open("../data/transactions_json.ison", "w", encoding="utf-8") as file:
+        tr_list = get_transactions_from_csv(path_to_csv)
+        json.dump(tr_list, file, ensure_ascii=False)
     print(f"Сформировано {number_of_trans} записей с транзакциями")
 
 
@@ -71,7 +80,7 @@ def get_transactions_from_excel(path: str) -> list[dict]:
 if __name__ == "__main__":
     path_to_xls = "../data/transactions_excel.xlsx"
     number_of_trans = len(get_transactions_from_excel(path_to_xls))
-    print(f"Первая транзакция= {get_transactions_from_excel(path_to_xls)[:1]}")
+    print(f"Первая транзакция из  xls = {get_transactions_from_excel(path_to_xls)[:1]}")
     print(f"Сформировано {number_of_trans} записей с транзакциями")
 
 
@@ -87,13 +96,13 @@ def get_amount(transaction: dict) -> float:
     return result
 
 
-if __name__ == "__main__":
-    pass_to_json = "../data/operations.json"
-    transactions = get_transactions_from_json(pass_to_json)
-    for transaction in transactions:
-        trans_amount = get_amount(transaction)
-        user_input = input("Введите 'exit', чтобы выйти: ")
-        if user_input == "exit":
-            break
-        else:
-            continue
+# if __name__ == "__main__":
+#     pass_to_json = "../data/operations.json"
+#     transactions = get_transactions_from_json(pass_to_json)
+#     for transaction in transactions:
+#         trans_amount = get_amount(transaction)
+#         user_input = input("Введите 'exit', чтобы выйти: ")
+#         if user_input == "exit":
+#             break
+#         else:
+#             continue

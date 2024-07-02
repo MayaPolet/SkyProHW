@@ -9,6 +9,8 @@ from logers import log2
 
 card_number = "1111222233334444"
 account_number = "1111222233334444"
+info_account = "Счет 69086868315648596195"
+info_card = "American Express 1368443024115273"
 
 
 def mask_account(account_number: str) -> str:
@@ -22,6 +24,22 @@ def mask_card(card_number: str) -> str:
     card_mask = card_number[0:4] + " " + card_number[5:7]
     card_mask = card_mask + "** **** " + card_number[-4:]
     return card_mask
+
+
+def mask_info(info: str) -> str:
+    """Маскирует номер карты или счета"""
+    info_length = len(info)
+    if info_length == 21:
+        info_masked = mask_account(info[-16:])
+    else:
+        info_masked = mask_card(info[-16:])
+    result = info[:-15] + info_masked
+    return result
+
+
+if __name__ == "__main__":
+    print(mask_info(info_account))
+    print(mask_info(info_card))
 
 
 if __name__ == "__main__":
